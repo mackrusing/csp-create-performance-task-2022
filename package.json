@@ -1,0 +1,32 @@
+{
+  "name": "csp-create-performance-task",
+  "version": "1.0.0",
+  "description": "A command-line tool that helps with basic chemistry calculations.",
+  "main": "main.js",
+  "type": "commonjs",
+  "bin": {
+    "chemhelp": "main.js"
+  },
+  "scripts": {
+    "start": "node main.js",
+    "format": "npx prettier --write ./"
+  },
+  "author": "Mack Rusing",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mackrusing/csp-create-performance-task.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mackrusing/csp-create-performance-task/issues"
+  },
+  "homepage": "https://github.com/mackrusing/csp-create-performance-task#readme",
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.0",
+    "periodic-table": "^0.0.8"
+  }
+}
