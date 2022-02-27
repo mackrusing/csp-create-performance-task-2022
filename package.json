@@ -2,11 +2,11 @@
   "name": "csp-create-performance-task",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "npx tsc && npx prettier --write ./",
-    "test": "npx tsc && node index.js",
+    "start": "node main.js",
+    "test": "npm run build && echo '\n-----\n' && node main.js",
+    "build": "npm run compile && npm run format",
     "compile": "npx tsc",
     "format": "npx prettier --write ./"
   },
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mackrusing/csp-create-performance-task#readme",
   "devDependencies": {
+    "@types/node": "^17.0.21",
     "prettier": "^2.5.1",
     "typescript": "^4.5.5"
   }
