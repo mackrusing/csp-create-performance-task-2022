@@ -5,11 +5,10 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "node main.js",
-    "test": "npm run build && echo '\n-----\n' && node main.js",
-    "build": "npm run compile && npm run format",
-    "compile": "npx tsc",
-    "format": "npx prettier --write ./"
+    "start": "sh scripts/start.sh",
+    "test": "sh scripts/test.sh",
+    "build": "sh scripts/build.sh",
+    "clean": "sh scripts/clean.sh"
   },
   "author": "Mack Rusing",
   "license": "MIT",

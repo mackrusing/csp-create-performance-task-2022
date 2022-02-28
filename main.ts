@@ -8,22 +8,65 @@ import inquirer from 'inquirer';
 // cap rate = noi / value
 // noi = value * cap
 
+// defalut values
+// value: 200000
+// noi: 10000
+// cap: 5
+
 // anual rent = per sq ft * sq ft
 // monthly rent = anual rent / 12
 // anual / cap rate = value of investment
 
 // calculate value
-const calculateValue = (noi: number, cap: number) => {
-  return noi / cap;
+const calculateValue = async () => {
+  // get user input
+  const response = await inquirer.prompt([
+    {
+      name: 'noi',
+      type: 'number',
+      message: "What's the property's net operating income?",
+      default() {
+        return 10000;
+      },
+    },
+    {
+      name: 'cap',
+      type: 'number',
+      message: "What's the property's cap rate?",
+      default() {
+        return 5;
+      },
+    },
+  ]);
+  return response.noi / (response.cap / 100);
 };
 
 // calculate cap rate
-const calculateCap = (noi: number, value: number) => {
-  return noi / value;
+const calculateCap = async () => {
+  // get user input
+  const response = await inquirer.prompt([
+    {
+      name: 'noi',
+      type: 'number',
+      message: "What's the property's net operating income?",
+      default() {
+        return 10000;
+      },
+    },
+    {
+      name: 'value',
+      type: 'number',
+      message: "What's the property's value?",
+      default() {
+        return 200000;
+      },
+    },
+  ]);
+  return (response.noi / response.value) * 100;
 };
 
 // calculate net operating income
-const calculateNoi = async (value: number, cap: number) => {
+const calculateNoi = async () => {
   // get user input
   const response = await inquirer.prompt([
     {
@@ -31,7 +74,7 @@ const calculateNoi = async (value: number, cap: number) => {
       type: 'number',
       message: "What's the property's value?",
       default() {
-        return 10000;
+        return 200000;
       },
     },
     {
@@ -46,7 +89,7 @@ const calculateNoi = async (value: number, cap: number) => {
   return response.value * (response.cap / 100);
 };
 
-// get and return the operation to execute
+// get and execute operation
 const getOperation = async () => {
   // get user input
   const response = await inquirer.prompt({
@@ -63,63 +106,17 @@ const getOperation = async () => {
     },
   });
 
-  // return shortened response keyword
+  // execute operation
   if (response.operation === 'calculate net operating income') {
-    return 'calculateNoi';
+    return await calculateNoi();
   } else if (response.operation === 'calculate cap rate') {
-    return 'calculateCap';
+    return await calculateCap();
   } else {
-    return 'calculateValue';
+    return await calculateValue();
   }
 };
 
-//
-const askValues = async (operation: string) => {
-  // ask for values needed to calculate noi
-  if (operation === 'calculateNoi') {
-    // get user input
-    const response = await inquirer.prompt([
-      {
-        name: 'income',
-        type: 'number',
-        message: "What is the property's income?",
-        default() {
-          return 10000;
-        },
-      },
-      {
-        name: 'expenses',
-        type: 'number',
-        message: "What is the property's expenses?",
-        default() {
-          return 2000;
-        },
-      },
-    ]);
-    return calculateNoi(response.income, response.expenses);
-  } else if (operation === 'calculateValue') {
-    // get user input
-    const response = await inquirer.prompt([
-      {
-        name: 'noi',
-        type: 'number',
-        message: "What is the property's NOI?",
-        default() {
-          return 10000;
-        },
-      },
-      {
-        name: 'cap',
-        type: 'number',
-        message: "What is the property's cap rate?",
-        default() {
-          return 0.05;
-        },
-      },
-    ]);
-    return calculateValue(response.noi, response.cap);
-  }
-};
+console.log(await getOperation());
 
 // const operation = await getOperation();
 // const result = await askValues(operation);
