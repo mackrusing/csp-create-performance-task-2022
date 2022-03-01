@@ -4,6 +4,14 @@
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 
+/******************************************************************************/
+
+const chlkValue = chalk.bold.green;
+const chlkCap = chalk.bold.yellow;
+const chlkNoi = chalk.bold.magenta;
+
+/******************************************************************************/
+
 // value = noi / cap
 // cap rate = noi / value
 // noi = value * cap
@@ -38,7 +46,8 @@ const calculateValue = async () => {
       },
     },
   ]);
-  return response.noi / (response.cap / 100);
+  const value = response.noi / (response.cap / 100);
+  logResults(response.noi, value, response.cap);
 };
 
 // calculate cap rate
@@ -62,7 +71,8 @@ const calculateCap = async () => {
       },
     },
   ]);
-  return (response.noi / response.value) * 100;
+  const cap = (response.noi / response.value) * 100;
+  logResults(response.noi, response.value, cap);
 };
 
 // calculate net operating income
@@ -86,8 +96,11 @@ const calculateNoi = async () => {
       },
     },
   ]);
-  return response.value * (response.cap / 100);
+  const noi = response.value * (response.cap / 100);
+  logResults(noi, response.value, response.cap);
 };
+
+/******************************************************************************/
 
 // get and execute operation
 const getOperation = async () => {
@@ -102,41 +115,27 @@ const getOperation = async () => {
       'calculate value',
     ],
     default() {
-      return 'calculate value';
+      return 'calculate net operating income';
     },
   });
 
   // execute operation
-  if (response.operation === 'calculate net operating income') {
-    return await calculateNoi();
-  } else if (response.operation === 'calculate cap rate') {
-    return await calculateCap();
+  if (response.operation === 'calculate cap rate') {
+    calculateCap();
+  } else if (response.operation === 'calculate value') {
+    calculateValue();
   } else {
-    return await calculateValue();
+    calculateNoi();
   }
 };
 
-console.log(await getOperation());
+const logResults = (noi: number, value: number, cap: number) => {
+  console.log(`-----
+noi: ${chlkNoi('$' + noi)}
+value: ${chlkValue('$' + value)}
+cap: ${chlkCap(cap)} (${chlkCap(cap / 100)})`);
+};
 
-// const operation = await getOperation();
-// const result = await askValues(operation);
-// console.log(result);
+/******************************************************************************/
 
-// let playerName: string;
-//
-// const askInput = async () => {
-//   const answers = await inquirer.prompt({
-//     name: 'player_name',
-//     type: 'input',
-//     message: 'What is your name?',
-//     // default() {
-//     //   return 'Player';
-//     // },
-//   });
-//   playerName = answers.player_name;
-//   console.log(playerName);
-// };
-
-// console.log(chalk.bgCyanBright.bold.black('hello world'));
-// await askInput();
-// console.log(await getOperation());
+getOperation();

@@ -1,5 +1,12 @@
 #!/usr/local/bin/node
+// import modules
+import chalk from 'chalk';
 import inquirer from 'inquirer';
+/******************************************************************************/
+const chlkValue = chalk.bold.green;
+const chlkCap = chalk.bold.yellow;
+const chlkNoi = chalk.bold.magenta;
+/******************************************************************************/
 // value = noi / cap
 // cap rate = noi / value
 // noi = value * cap
@@ -12,118 +19,107 @@ import inquirer from 'inquirer';
 // anual / cap rate = value of investment
 // calculate value
 const calculateValue = async () => {
-    // get user input
-    const response = await inquirer.prompt([
-        {
-            name: 'noi',
-            type: 'number',
-            message: "What's the property's net operating income?",
-            default() {
-                return 10000;
-            },
-        },
-        {
-            name: 'cap',
-            type: 'number',
-            message: "What's the property's cap rate?",
-            default() {
-                return 5;
-            },
-        },
-    ]);
-    return response.noi / (response.cap / 100);
+  // get user input
+  const response = await inquirer.prompt([
+    {
+      name: 'noi',
+      type: 'number',
+      message: "What's the property's net operating income?",
+      default() {
+        return 10000;
+      },
+    },
+    {
+      name: 'cap',
+      type: 'number',
+      message: "What's the property's cap rate?",
+      default() {
+        return 5;
+      },
+    },
+  ]);
+  const value = response.noi / (response.cap / 100);
+  logResults(response.noi, value, response.cap);
 };
 // calculate cap rate
 const calculateCap = async () => {
-    // get user input
-    const response = await inquirer.prompt([
-        {
-            name: 'noi',
-            type: 'number',
-            message: "What's the property's net operating income?",
-            default() {
-                return 10000;
-            },
-        },
-        {
-            name: 'value',
-            type: 'number',
-            message: "What's the property's value?",
-            default() {
-                return 200000;
-            },
-        },
-    ]);
-    return (response.noi / response.value) * 100;
+  // get user input
+  const response = await inquirer.prompt([
+    {
+      name: 'noi',
+      type: 'number',
+      message: "What's the property's net operating income?",
+      default() {
+        return 10000;
+      },
+    },
+    {
+      name: 'value',
+      type: 'number',
+      message: "What's the property's value?",
+      default() {
+        return 200000;
+      },
+    },
+  ]);
+  const cap = (response.noi / response.value) * 100;
+  logResults(response.noi, response.value, cap);
 };
 // calculate net operating income
 const calculateNoi = async () => {
-    // get user input
-    const response = await inquirer.prompt([
-        {
-            name: 'value',
-            type: 'number',
-            message: "What's the property's value?",
-            default() {
-                return 200000;
-            },
-        },
-        {
-            name: 'cap',
-            type: 'number',
-            message: "What's the property's cap rate?",
-            default() {
-                return 5;
-            },
-        },
-    ]);
-    return response.value * (response.cap / 100);
+  // get user input
+  const response = await inquirer.prompt([
+    {
+      name: 'value',
+      type: 'number',
+      message: "What's the property's value?",
+      default() {
+        return 200000;
+      },
+    },
+    {
+      name: 'cap',
+      type: 'number',
+      message: "What's the property's cap rate?",
+      default() {
+        return 5;
+      },
+    },
+  ]);
+  const noi = response.value * (response.cap / 100);
+  logResults(noi, response.value, response.cap);
 };
+/******************************************************************************/
 // get and execute operation
 const getOperation = async () => {
-    // get user input
-    const response = await inquirer.prompt({
-        name: 'operation',
-        type: 'list',
-        message: 'What operation would you like to perform?',
-        choices: [
-            'calculate net operating income',
-            'calculate cap rate',
-            'calculate value',
-        ],
-        default() {
-            return 'calculate value';
-        },
-    });
-    // execute operation
-    if (response.operation === 'calculate net operating income') {
-        return await calculateNoi();
-    }
-    else if (response.operation === 'calculate cap rate') {
-        return await calculateCap();
-    }
-    else {
-        return await calculateValue();
-    }
+  // get user input
+  const response = await inquirer.prompt({
+    name: 'operation',
+    type: 'list',
+    message: 'What operation would you like to perform?',
+    choices: [
+      'calculate net operating income',
+      'calculate cap rate',
+      'calculate value',
+    ],
+    default() {
+      return 'calculate net operating income';
+    },
+  });
+  // execute operation
+  if (response.operation === 'calculate cap rate') {
+    calculateCap();
+  } else if (response.operation === 'calculate value') {
+    calculateValue();
+  } else {
+    calculateNoi();
+  }
 };
-console.log(await getOperation());
-// const operation = await getOperation();
-// const result = await askValues(operation);
-// console.log(result);
-// let playerName: string;
-//
-// const askInput = async () => {
-//   const answers = await inquirer.prompt({
-//     name: 'player_name',
-//     type: 'input',
-//     message: 'What is your name?',
-//     // default() {
-//     //   return 'Player';
-//     // },
-//   });
-//   playerName = answers.player_name;
-//   console.log(playerName);
-// };
-// console.log(chalk.bgCyanBright.bold.black('hello world'));
-// await askInput();
-// console.log(await getOperation());
+const logResults = (noi, value, cap) => {
+  console.log(`-----
+noi: ${chlkNoi('$' + noi)}
+value: ${chlkValue('$' + value)}
+cap: ${chlkCap(cap)} (${chlkCap(cap / 100)})`);
+};
+/******************************************************************************/
+getOperation();
