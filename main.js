@@ -1,4 +1,3 @@
-#!/usr/local/bin/node
 // import modules
 import chalk from 'chalk';
 import inquirer from 'inquirer';
