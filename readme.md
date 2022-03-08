@@ -7,18 +7,17 @@
 A command-line tool for DESCRIBE FUNCTION built with inquirer.
 
 - [Installation](#installation)
-- [Dependencies](#dependencies)
 - [Usage](#usage)
 - [Issues](#issues)
-- [License](#license)
-- [References](#references)
 
 ## Installation
+
+**This program requires [Node.js](https://nodejs.org/en/)**
 
 1. Clone this repository to your machine
 
 ```
-git clone https://github.com/mackrusing/rest-api.git
+git clone https://github.com/mackrusing/csp-create-performance-task.git
 ```
 
 2. Install all dependences using npm. To exclude dev dependencies use the `--production` flag (if you don't want to install typescript and prettier)
@@ -28,27 +27,15 @@ npm install
 npm install --production
 ```
 
-3. Use the start script or run the `main.js` file in node
+## Usage
+
+Use the npm start script or run the `main.js` file in node to execute the script.
 
 ```
 npm start
 node main.js
 ```
 
-## Dependencies
-
--
-
-### Dev dependencies
-
-- Prettier
-
-## Usage
-
 ## Issues
 
-If you find any bugs, feel free to open an issue on this projects [issue page](https://github.com/mackrusing/rest-api/issues).
-
-## License
-
-All source code is licesnsed under the [MIT License](./license.md). Feel free to use any part of this repo in your own projects!
+If you find any bugs, feel free to open an issue on this project's [issue page](https://github.com/mackrusing/csp-create-performance-task/issues).
