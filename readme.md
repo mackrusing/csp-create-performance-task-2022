@@ -37,14 +37,13 @@ node main.js
 
 ## Dependencies
 
-- 
+-
 
 ### Dev dependencies
 
 - Prettier
 
 ## Usage
-
 
 ## Issues
 

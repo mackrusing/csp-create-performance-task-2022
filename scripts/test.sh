@@ -1,2 +1,2 @@
-npx tsc
+sh scripts/build.sh
 node main.js
