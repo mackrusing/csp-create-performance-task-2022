@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": ["main.ts"]
+  "files": ["main.ts", "psydo.ts"]
 }

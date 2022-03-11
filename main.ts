@@ -17,13 +17,11 @@ const isUpperCase = (char: string) => {};
 const sliceEquation = (equation: string): string[] => {
   let isReactantSide = true;
   let isAwaitingIndicatior = false;
-  let formulaIndex = 0
-  let current 
+  let formulaIndex = 0;
+  let current;
 
   for (let i = 0; i < equation.length; i++) {
-    
-
-    const char = equation[i]
+    const char = equation[i];
 
     // end current formula + await indicator
     if (char === ' ') {
@@ -39,13 +37,10 @@ const sliceEquation = (equation: string): string[] => {
     }
 
     if (isReactantSide) {
-
     } else {
-
     }
 
     if (char !== '+' && char !== '>') {
-
     }
 
     if (char === '-') {
@@ -57,11 +52,10 @@ const sliceEquation = (equation: string): string[] => {
     }
 
     if (isProductSide) {
-
     }
   }
-  return ['joe', '']
-}
+  return ['joe', ''];
+};
 
 /******************************************************************************/
 
@@ -83,9 +77,7 @@ const getEquation = async () => {
   const equation = response.equation;
   const extractedData = {};
 
-  for (let char = 0; char < equation.length; char++) {
-    if 
-  }
+  for (let char = 0; char < equation.length; char++) {}
 
   const exMidData = {
     reactants: ['Na', '(OH)2', 'C', 'O2'],
