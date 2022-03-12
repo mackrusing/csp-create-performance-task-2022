@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 import inquirer from 'inquirer';
-const separateEqu = (equStr) => {
+const separateEquation = (equStr) => {
     // split equation into array
     const equArr = equStr.split(' ');
-    // sort formula into reactants and products
-    const equSort = {
-        reactants: [],
-        products: [],
+    // object to be appended
+    const equObj = {
+        reactants: {},
+        products: {},
     };
+    // sort formula into reactants and products
     let isReactantSide = true;
     for (const str of equArr) {
         // skip all '+'s
@@ -21,15 +22,23 @@ const separateEqu = (equStr) => {
         }
         // add formulas to correct array
         if (isReactantSide) {
-            equSort.reactants.push(str);
+            equObj.reactants[str] = {};
         }
         else {
-            equSort.products.push(str);
+            equObj.products[str] = {};
         }
     }
-    return equSort;
+    // separate elements in formulas
+    for (const formula of Object.keys(equObj.reactants)) {
+        for (const char of formula) {
+            console.log(char);
+        }
+    }
+    for (const formula of Object.keys(equObj.products)) {
+    }
+    return equObj;
 };
-console.log(separateEqu('NaCl2 + H2O -> NaO + HCl'));
+// console.log(separateEquation('NaCl2 + H2O -> NaO + HCl'));
 /******************************************************************************/
 // get chemical equation input
 const getEquation = async () => {
@@ -40,30 +49,29 @@ const getEquation = async () => {
             type: 'string',
             message: 'What is the unbalenced equation?',
             default() {
-                return 'Na(OH)2 + CO2 -> NaO + H2O';
+                return 'NaCl2 + H2O -> NaO + HCl';
             },
         },
     ]);
     // process response
-    const equation = response.equation;
-    const extractedData = {};
-    for (let char = 0; char < equation.length; char++) { }
-    const exMidData = {
-        reactants: ['Na', '(OH)2', 'C', 'O2'],
-        products: ['Na', 'O', 'H2', 'O'],
-    };
-    const exData = {
-        reactants: {
-            Na: 1,
-            O: 3,
-            H: 2,
-            C: 1,
-        },
-        products: {
-            Na: 1,
-            O: 2,
-            H: 2,
-        },
-    };
+    const equObj = separateEquation(response.equation);
+    return equObj;
 };
 /******************************************************************************/
+console.log(await getEquation());
+const ex = {
+    reactants: {
+        NaCl2: {
+            Na: 1,
+            Cl: 2,
+        },
+        H2O: {
+            H: 2,
+            O: 1,
+        },
+    },
+    products: {
+        NaO: [],
+        HCl: [],
+    },
+};

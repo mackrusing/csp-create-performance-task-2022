@@ -76,7 +76,10 @@ const stage2 = {
 
 ```js
 const stage3 = {
-  reactants: ['Na', 'Cl2', 'H2', 'O'],
+  reactants: {
+    NaCl2: ['Na', 'Cl2'],
+    H2O: ['H2', 'O'],
+  },
   products: ['Na', 'O', 'H', 'Cl'],
 };
 ```

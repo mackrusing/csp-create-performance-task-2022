@@ -1,1 +1,1 @@
-npx tsc --project .tsconfig.json
+npx tsc --project tsconfig.json
