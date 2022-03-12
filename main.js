@@ -1,46 +1,35 @@
 #!/usr/bin/env node
 import inquirer from 'inquirer';
-/******************************************************************************/
-// const chlkValue = chalk.bold.green;
-// const chlkCap = chalk.bold.yellow;
-// const chlkNoi = chalk.bold.magenta;
-/******************************************************************************/
-const isUpperCase = (char) => { };
-const sliceEquation = (equation) => {
+const separateEqu = (equStr) => {
+    // split equation into array
+    const equArr = equStr.split(' ');
+    // sort formula into reactants and products
+    const equSort = {
+        reactants: [],
+        products: [],
+    };
     let isReactantSide = true;
-    let isAwaitingIndicatior = false;
-    let formulaIndex = 0;
-    let current;
-    for (let i = 0; i < equation.length; i++) {
-        const char = equation[i];
-        // end current formula + await indicator
-        if (char === ' ') {
-            isAwaitingIndicatior = true;
+    for (const str of equArr) {
+        // skip all '+'s
+        if (str === '+') {
+            continue;
         }
-        // look for specific indicators
-        if (isAwaitingIndicatior) {
-            // indicate side switch
-            if (char === '>') {
-                isReactantSide = false;
-            }
+        // check for side change
+        if (str === '->') {
+            isReactantSide = false;
+            continue;
         }
+        // add formulas to correct array
         if (isReactantSide) {
+            equSort.reactants.push(str);
         }
         else {
-        }
-        if (char !== '+' && char !== '>') {
-        }
-        if (char === '-') {
-            isReactantSide = false;
-        }
-        if (char === ' ') {
-            isAwaitingIndicatior = true;
-        }
-        if (isProductSide) {
+            equSort.products.push(str);
         }
     }
-    return ['joe', ''];
+    return equSort;
 };
+console.log(separateEqu('NaCl2 + H2O -> NaO + HCl'));
 /******************************************************************************/
 // get chemical equation input
 const getEquation = async () => {
@@ -78,4 +67,3 @@ const getEquation = async () => {
     };
 };
 /******************************************************************************/
-console.clear();
