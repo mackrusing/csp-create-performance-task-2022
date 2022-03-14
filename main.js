@@ -56,68 +56,70 @@ const separateEquation = (equStr) => {
         }
     }
     // separate elements in formulas
-    for (const formula of Object.keys(equObj.reactants)) {
-        // setup loop vars
-        let currentStr = '';
-        let formulaComponents = [];
-        // loop over each character
-        for (let i = 0; i < formula.length; i++) {
-            // get current character
-            const char = formula[i];
-            // start new element
-            if (isUpperCase(char) && i !== 0) {
-                formulaComponents.push(currentStr);
-                currentStr = '';
-            }
-            // add current char to string
-            currentStr += char;
-            // check if last character
-            if (i === formula.length - 1) {
-                formulaComponents.push(currentStr);
-            }
+    for (let i = 0; i < 2; i++) {
+        // change side
+        let side;
+        if (i === 0) {
+            side = 'reactants';
         }
-        // console.log(formulaComponents);
-        // loop over components of current formulas
-        for (const component of formulaComponents) {
+        else {
+            side = 'products';
+        }
+        for (const formula of Object.keys(equObj[side])) {
             // setup loop vars
-            let element = '';
-            let subscript = '';
-            let isSubscript = false;
+            let currentStr = '';
+            let formulaComponents = [];
             // loop over each character
-            for (let i = 0; i < component.length; i++) {
-                const char = component[i];
-                if (isNum(char)) {
-                    isSubscript = true;
+            for (let i = 0; i < formula.length; i++) {
+                // get current character
+                const char = formula[i];
+                // start new element
+                if (isUpperCase(char) && i !== 0) {
+                    formulaComponents.push(currentStr);
+                    currentStr = '';
                 }
-                // add character to corresponding loop var
-                if (!isSubscript) {
-                    element += char;
+                // add current char to string
+                currentStr += char;
+                // check if last character
+                if (i === formula.length - 1) {
+                    formulaComponents.push(currentStr);
                 }
-                else {
-                    subscript += char;
-                }
-                // if is last character
-                if (i === component.length - 1) {
-                    // handle subscripts (and absence of subscripts)
+            }
+            // loop over components of current formulas
+            for (const component of formulaComponents) {
+                // setup loop vars
+                let element = '';
+                let subscript = '';
+                let isSubscript = false;
+                // loop over each character
+                for (let i = 0; i < component.length; i++) {
+                    const char = component[i];
+                    if (isNum(char)) {
+                        isSubscript = true;
+                    }
+                    // add character to corresponding loop var
                     if (!isSubscript) {
-                        equObj.reactants[formula][element] += 1;
+                        element += char;
                     }
                     else {
-                        equObj.reactants[formula][element] += parseInt(subscript);
+                        subscript += char;
+                    }
+                    // if is last character
+                    if (i === component.length - 1) {
+                        // handle subscripts (and absence of subscripts)
+                        if (!isSubscript) {
+                            equObj[side][formula][element] = 1;
+                        }
+                        else {
+                            equObj[side][formula][element] = parseInt(subscript);
+                        }
                     }
                 }
-                // console.log(element);
-                // console.log(subscript);
             }
         }
-    }
-    console.log(equObj);
-    // console.log(equObj.reactants);
-    for (const formula of Object.keys(equObj.products)) {
     }
     return equObj;
 };
-// console.log(separateEquation('NaCl2 + H2O -> NaO + HCl'));
 /******************************************************************************/
 // get chemical equation input
 const getEquation = async () => {
@@ -182,7 +184,7 @@ const getOperation = async () => {
         return getFormula();
     }
 };
-await getOperation();
+console.log(await getOperation());
 const ex = {
     reactants: {
         NaCl2: {
@@ -195,7 +197,7 @@ const ex = {
         },
     },
     products: {
-        NaO: [],
-        HCl: [],
+        NaO: {},
+        HCl: {},
     },
 };
