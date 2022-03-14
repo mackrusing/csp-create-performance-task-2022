@@ -35,49 +35,6 @@ const isNum = (str: string): boolean => {
   }
 };
 
-// const sliceEquation = (equation: string): string[] => {
-//   let isReactantSide = true;
-//   let isAwaitingIndicatior = false;
-//   let formulaIndex = 0;
-//   let current;
-
-//   for (let i = 0; i < equation.length; i++) {
-//     const char = equation[i];
-
-//     // end current formula + await indicator
-//     if (char === ' ') {
-//       isAwaitingIndicatior = true;
-//     }
-
-//     // look for specific indicators
-//     if (isAwaitingIndicatior) {
-//       // indicate side switch
-//       if (char === '>') {
-//         isReactantSide = false;
-//       }
-//     }
-
-//     if (isReactantSide) {
-//     } else {
-//     }
-
-//     if (char !== '+' && char !== '>') {
-//     }
-
-//     if (char === '-') {
-//       isReactantSide = false;
-//     }
-
-//     if (char === ' ') {
-//       isAwaitingIndicatior = true;
-//     }
-
-//     if (isProductSide) {
-//     }
-//   }
-//   return ['joe', ''];
-// };
-
 interface Formula {}
 
 interface EquSort {
@@ -145,8 +102,6 @@ const separateEquation = (equStr: string) => {
       }
     }
 
-    // console.log(formulaComponents);
-
     // loop over components of current formulas
     for (const component of formulaComponents) {
       // setup loop vars
@@ -173,9 +128,9 @@ const separateEquation = (equStr: string) => {
         if (i === component.length - 1) {
           // handle subscripts (and absence of subscripts)
           if (!isSubscript) {
-            equObj.reactants[formula][element] += 1;
+            equObj.reactants[formula][element] = 1;
           } else {
-            equObj.reactants[formula][element] += parseInt(subscript);
+            equObj.reactants[formula][element] = parseInt(subscript);
           }
         }
 
