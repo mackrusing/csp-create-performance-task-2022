@@ -65,6 +65,7 @@ const separateEquation = (equStr) => {
         else {
             side = 'products';
         }
+        // execute loop
         for (const formula of Object.keys(equObj[side])) {
             // setup loop vars
             let currentStr = '';
@@ -119,6 +120,9 @@ const separateEquation = (equStr) => {
         }
     }
     return equObj;
+};
+const solveEquation = (equObj) => {
+    // check
 };
 /******************************************************************************/
 // get chemical equation input

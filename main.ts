@@ -241,7 +241,13 @@ const ex = {
     },
   },
   products: {
-    NaO: {},
-    HCl: {},
+    NaO: {
+      Na: 1,
+      O: 1,
+    },
+    HCl: {
+      H: 1,
+      Cl: 1,
+    },
   },
 };
