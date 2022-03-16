@@ -35,12 +35,7 @@ const isNum = (str: string): boolean => {
   }
 };
 
-interface Formula {}
-
-interface EquSort {
-  reactants: string[];
-  products: string[];
-}
+const calculateElementTotals = () => {};
 
 const separateEquation = (equStr: string) => {
   // split equation into array
@@ -48,8 +43,18 @@ const separateEquation = (equStr: string) => {
 
   // object to be appended
   const equObj: any = {
-    reactants: {},
-    products: {},
+    formulas: {
+      reactants: {},
+      products: {},
+    },
+    coefficients: {
+      reactants: {},
+      products: {},
+    },
+    elements: {
+      reactants: {},
+      products: {},
+    },
   };
 
   // sort formula into reactants and products
@@ -66,13 +71,13 @@ const separateEquation = (equStr: string) => {
       continue;
     }
 
-    // add formulas to correct array
+    // add formulas to correct arrays
     if (isReactantSide) {
-      equObj.reactants[str] = {};
-      // equObj.reactants[str].elements = [];
+      equObj.formulas.reactants[str] = {};
+      equObj.coefficients.reactants[str] = 1;
     } else {
-      equObj.products[str] = {};
-      // equObj.products[str].elements = [];
+      equObj.formulas.products[str] = {};
+      equObj.coefficients.products[str] = 1;
     }
   }
 
@@ -87,7 +92,7 @@ const separateEquation = (equStr: string) => {
     }
 
     // execute loop
-    for (const formula of Object.keys(equObj[side])) {
+    for (const formula of Object.keys(equObj.formulas[side])) {
       // setup loop vars
       let currentStr = '';
       let formulaComponents: string[] = [];
@@ -138,9 +143,9 @@ const separateEquation = (equStr: string) => {
           if (i === component.length - 1) {
             // handle subscripts (and absence of subscripts)
             if (!isSubscript) {
-              equObj[side][formula][element] = 1;
+              equObj.formulas[side][formula][element] = 1;
             } else {
-              equObj[side][formula][element] = parseInt(subscript);
+              equObj.formulas[side][formula][element] = parseInt(subscript);
             }
           }
         }
@@ -227,7 +232,9 @@ const getOperation = async () => {
   }
 };
 
-console.log(await getOperation());
+const myEquObj = await getEquation();
+console.log(myEquObj);
+console.log(myEquObj.formulas);
 
 const ex = {
   reactants: {
@@ -246,6 +253,70 @@ const ex = {
       O: 1,
     },
     HCl: {
+      H: 1,
+      Cl: 1,
+    },
+  },
+};
+
+interface EquationObj {
+  formulas: {
+    reactants: {};
+    products: {};
+  };
+  coeficents: {
+    reactants: {};
+    products: {};
+  };
+  elements: {
+    reactants: {};
+    products: {};
+  };
+}
+
+const ex2 = {
+  formulas: {
+    reactants: {
+      NaCl2: {
+        Na: 1,
+        Cl: 2,
+      },
+      H2O: {
+        H: 2,
+        O: 1,
+      },
+    },
+    products: {
+      NaO: {
+        Na: 1,
+        O: 1,
+      },
+      HCl: {
+        H: 1,
+        Cl: 1,
+      },
+    },
+  },
+  coefficients: {
+    reactants: {
+      NaCl2: 1,
+      H2O: 1,
+    },
+    products: {
+      NaO: 1,
+      HCl: 1,
+    },
+  },
+  elements: {
+    reactants: {
+      Na: 1,
+      Cl: 2,
+      H: 2,
+      O: 1,
+    },
+    products: {
+      Na: 1,
+      O: 1,
       H: 1,
       Cl: 1,
     },

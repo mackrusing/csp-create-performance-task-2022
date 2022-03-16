@@ -30,8 +30,18 @@ const separateEquation = (equStr) => {
     const equArr = equStr.split(' ');
     // object to be appended
     const equObj = {
-        reactants: {},
-        products: {},
+        formulas: {
+            reactants: {},
+            products: {},
+        },
+        coefficients: {
+            reactants: {},
+            products: {},
+        },
+        elements: {
+            reactants: {},
+            products: {},
+        },
     };
     // sort formula into reactants and products
     let isReactantSide = true;
@@ -45,14 +55,14 @@ const separateEquation = (equStr) => {
             isReactantSide = false;
             continue;
         }
-        // add formulas to correct array
+        // add formulas to correct arrays
         if (isReactantSide) {
-            equObj.reactants[str] = {};
-            // equObj.reactants[str].elements = [];
+            equObj.formulas.reactants[str] = {};
+            equObj.coefficients.reactants[str] = 1;
         }
         else {
-            equObj.products[str] = {};
-            // equObj.products[str].elements = [];
+            equObj.formulas.products[str] = {};
+            equObj.coefficients.products[str] = 1;
         }
     }
     // separate elements in formulas
@@ -66,7 +76,7 @@ const separateEquation = (equStr) => {
             side = 'products';
         }
         // execute loop
-        for (const formula of Object.keys(equObj[side])) {
+        for (const formula of Object.keys(equObj.formulas[side])) {
             // setup loop vars
             let currentStr = '';
             let formulaComponents = [];
@@ -109,10 +119,10 @@ const separateEquation = (equStr) => {
                     if (i === component.length - 1) {
                         // handle subscripts (and absence of subscripts)
                         if (!isSubscript) {
-                            equObj[side][formula][element] = 1;
+                            equObj.formulas[side][formula][element] = 1;
                         }
                         else {
-                            equObj[side][formula][element] = parseInt(subscript);
+                            equObj.formulas[side][formula][element] = parseInt(subscript);
                         }
                     }
                 }
@@ -188,7 +198,9 @@ const getOperation = async () => {
         return getFormula();
     }
 };
-console.log(await getOperation());
+const myEquObj = await getEquation();
+console.log(myEquObj);
+console.log(myEquObj.formulas);
 const ex = {
     reactants: {
         NaCl2: {
@@ -201,7 +213,61 @@ const ex = {
         },
     },
     products: {
-        NaO: {},
-        HCl: {},
+        NaO: {
+            Na: 1,
+            O: 1,
+        },
+        HCl: {
+            H: 1,
+            Cl: 1,
+        },
+    },
+};
+const ex2 = {
+    formulas: {
+        reactants: {
+            NaCl2: {
+                Na: 1,
+                Cl: 2,
+            },
+            H2O: {
+                H: 2,
+                O: 1,
+            },
+        },
+        products: {
+            NaO: {
+                Na: 1,
+                O: 1,
+            },
+            HCl: {
+                H: 1,
+                Cl: 1,
+            },
+        },
+    },
+    coefficients: {
+        reactants: {
+            NaCl2: 1,
+            H2O: 1,
+        },
+        products: {
+            NaO: 1,
+            HCl: 1,
+        },
+    },
+    elements: {
+        reactants: {
+            Na: 1,
+            Cl: 2,
+            H: 2,
+            O: 1,
+        },
+        products: {
+            Na: 1,
+            O: 1,
+            H: 1,
+            Cl: 1,
+        },
     },
 };
