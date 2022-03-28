@@ -1,7 +1,7 @@
 // modules
 import inquirer from 'inquirer';
 
-/** character type helpers **/
+/*************************** character type helpers ***************************/
 
 const isUpperCase = (char: string): boolean => {
   // check if number
@@ -26,7 +26,7 @@ const isNum = (str: string): boolean => {
   }
 };
 
-/** user input helpers **/
+/***************************** user input helpers *****************************/
 
 // text input
 const getTxtInput = async (prompt: string, sample: string) => {
@@ -43,7 +43,7 @@ const getTxtInput = async (prompt: string, sample: string) => {
   return response.res;
 };
 
-/** input strings to objects **/
+/************************** input strings to objects **************************/
 
 // convert equation in string form to object
 const equStrToObj = (equStr: string) => {
@@ -106,7 +106,7 @@ const formulaToElementsArr = (formula: string) => {
   return elementsArr;
 };
 
-/** grams to moles **/
+/******************************* grams to moles *******************************/
 
 // convert a formula with ammount in grams to moles
 const gramsToMoles = (formula: any) => {
@@ -114,7 +114,7 @@ const gramsToMoles = (formula: any) => {
   console.log(eleArr);
 };
 
-/** operations **/
+/********************************* operations *********************************/
 
 const calcFrom1Reactant = async () => {
   const equation = equStrToObj(
@@ -129,5 +129,7 @@ const calcFrom1Reactant = async () => {
   // gramsToMoles();
   console.log(gramsToMoles(reactant1));
 };
+
+/*********************************** tests ************************************/
 
 calcFrom1Reactant();
