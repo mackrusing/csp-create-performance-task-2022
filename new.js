@@ -1,109 +1,186 @@
 // modules
 import inquirer from 'inquirer';
-/** character type helpers **/
+/*************************** character type helpers ***************************/
 const isUpperCase = (char) => {
-  // check if number
-  if (isNum(char)) {
-    return false;
-  }
-  // check if lowercase
-  if (char == char.toLowerCase()) {
-    return false;
-  }
-  // otherwise uppercase
-  return true;
+    // check if number
+    if (isNum(char)) {
+        return false;
+    }
+    // check if lowercase
+    if (char == char.toLowerCase()) {
+        return false;
+    }
+    // otherwise uppercase
+    return true;
 };
 const isNum = (str) => {
-  if (+str) {
-    return true;
-  } else {
-    return false;
-  }
+    if (+str) {
+        return true;
+    }
+    else {
+        return false;
+    }
 };
-/** user input helpers **/
+/***************************** user input helpers *****************************/
 // text input
 const getTxtInput = async (prompt, sample) => {
-  const response = await inquirer.prompt([
-    {
-      name: 'res',
-      type: 'string',
-      message: prompt,
-      default() {
-        return sample;
-      },
-    },
-  ]);
-  return response.res;
+    const response = await inquirer.prompt([
+        {
+            name: 'res',
+            type: 'string',
+            message: prompt,
+            default() {
+                return sample;
+            },
+        },
+    ]);
+    return response.res;
 };
-/** input strings to objects **/
+// destructured 4 part equation input
+const getFourPtEqu = async () => {
+    const response = await inquirer.prompt([
+        {
+            name: 'react1',
+            type: 'string',
+            message: 'What is the first reactant?',
+            default() {
+                return 'CH4';
+            },
+        },
+        {
+            name: 'react1co',
+            type: 'number',
+            message: "What is it's coefficient?",
+            default() {
+                return 1;
+            },
+        },
+        {
+            name: 'react2',
+            type: 'string',
+            message: 'What is the second reactant?',
+            default() {
+                return 'O2';
+            },
+        },
+        {
+            name: 'react2co',
+            type: 'number',
+            message: "What is it's coefficient?",
+            default() {
+                return 1;
+            },
+        },
+        {
+            name: 'pro1',
+            type: 'string',
+            message: 'What is the first product?',
+            default() {
+                return 'H2O';
+            },
+        },
+        {
+            name: 'pro1co',
+            type: 'number',
+            message: "What is it's coefficient?",
+            default() {
+                return 1;
+            },
+        },
+        {
+            name: 'pro2',
+            type: 'string',
+            message: 'What is the first product?',
+            default() {
+                return 'CO2';
+            },
+        },
+        {
+            name: 'pro2co',
+            type: 'number',
+            message: "What is it's coefficient?",
+            default() {
+                return 1;
+            },
+        },
+    ]);
+    const equObj = {};
+    equObj[response.react1] = {};
+    equObj[response.react1].coefficient = response.react1co;
+    equObj[response.react2] = {};
+    equObj[response.react2].coefficient = response.react2co;
+    equObj[response.pro1] = {};
+    equObj[response.pro1].coefficient = response.pro1co;
+    equObj[response.pro2] = {};
+    equObj[response.pro2].coefficient = response.pro2co;
+    return equObj;
+};
+/************************** input strings to objects **************************/
 // convert equation in string form to object
 const equStrToObj = (equStr) => {
-  const equArr = equStr.split(' ');
+    const equArr = equStr.split(' ');
 };
 // convert measurement in string form to object
 const meaStrToObj = (meaStr) => {
-  const meaArr = meaStr.split(' ');
-  return {
-    ammount: +meaArr[0],
-    unit: meaArr[1],
-    formula: meaArr[2],
-  };
+    const meaArr = meaStr.split(' ');
+    return {
+        ammount: +meaArr[0],
+        unit: meaArr[1],
+        formula: meaArr[2],
+    };
 };
 // convert formula to array of element objects
 const formulaToElementsArr = (formula) => {
-  // list of elements in formula
-  const elementsArr = [];
-  // loop vars
-  let currentElement = { element: '', subscript: '' };
-  // split up elements
-  for (let i = 0; i < formula.length; i++) {
-    // current character
-    const currentChar = formula[i];
-    // check for capital character
-    if (isUpperCase(currentChar) && i !== 0) {
-      elementsArr.push(currentElement);
-      currentElement = { element: '', subscript: '' };
+    // list of elements in formula
+    const elementsArr = [];
+    // loop vars
+    let currentElement = { element: '', subscript: '' };
+    // split up elements
+    for (let i = 0; i < formula.length; i++) {
+        // current character
+        const currentChar = formula[i];
+        // check for capital character
+        if (isUpperCase(currentChar) && i !== 0) {
+            elementsArr.push(currentElement);
+            currentElement = { element: '', subscript: '' };
+        }
+        // add letter or number
+        if (isNum(currentChar)) {
+            currentElement.subscript += currentChar;
+        }
+        else {
+            currentElement.element += currentChar;
+        }
+        // check for last character
+        if (i === formula.length - 1) {
+            elementsArr.push(currentElement);
+        }
     }
-    // add letter or number
-    if (isNum(currentChar)) {
-      currentElement.subscript += currentChar;
-    } else {
-      currentElement.element += currentChar;
+    // clean up elements array
+    for (const obj of elementsArr) {
+        // convert empty subscripts to one
+        if (obj.subscript === '') {
+            obj.subscript = 1;
+        }
+        // convert subscripts to numbers
+        obj.subscript = +obj.subscript;
     }
-    // check for last character
-    if (i === formula.length - 1) {
-      elementsArr.push(currentElement);
-    }
-  }
-  // clean up elements array
-  for (const obj of elementsArr) {
-    // convert empty subscripts to one
-    if (obj.subscript === '') {
-      obj.subscript = 1;
-    }
-    // convert subscripts to numbers
-    obj.subscript = +obj.subscript;
-  }
-  return elementsArr;
+    return elementsArr;
 };
-/** grams to moles **/
+/******************************* grams to moles *******************************/
 // convert a formula with ammount in grams to moles
 const gramsToMoles = (formula) => {
-  const eleArr = formulaToElementsArr(formula.formula);
-  console.log(eleArr);
+    const eleArr = formulaToElementsArr(formula.formula);
+    console.log(eleArr);
 };
-/** operations **/
+/********************************* operations *********************************/
 const calcFrom1Reactant = async () => {
-  const equation = equStrToObj(
-    await getTxtInput(
-      'What is the balanced chemical equation?',
-      'CH4 + 2O2 -> 2H2O + CO2'
-    )
-  );
-  const reactant1 = meaStrToObj(
-    await getTxtInput('What is the given reactant?', '20 grams CH4')
-  );
-  // gramsToMoles();
-  console.log(gramsToMoles(reactant1));
+    const equation = await getFourPtEqu();
+    const reactant1 = meaStrToObj(await getTxtInput('What is the given reactant?', '20 grams CH4'));
+    // gramsToMoles();
+    console.log(equation);
+    console.log(reactant1);
+    console.log(gramsToMoles(reactant1));
 };
+/*********************************** tests ************************************/
 calcFrom1Reactant();

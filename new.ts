@@ -43,6 +43,89 @@ const getTxtInput = async (prompt: string, sample: string) => {
   return response.res;
 };
 
+// destructured 4 part equation input
+const getFourPtEqu = async () => {
+  const response = await inquirer.prompt([
+    {
+      name: 'react1',
+      type: 'string',
+      message: 'What is the first reactant?',
+      default() {
+        return 'CH4';
+      },
+    },
+    {
+      name: 'react1co',
+      type: 'number',
+      message: "What is it's coefficient?",
+      default() {
+        return 1;
+      },
+    },
+    {
+      name: 'react2',
+      type: 'string',
+      message: 'What is the second reactant?',
+      default() {
+        return 'O2';
+      },
+    },
+    {
+      name: 'react2co',
+      type: 'number',
+      message: "What is it's coefficient?",
+      default() {
+        return 1;
+      },
+    },
+    {
+      name: 'pro1',
+      type: 'string',
+      message: 'What is the first product?',
+      default() {
+        return 'H2O';
+      },
+    },
+    {
+      name: 'pro1co',
+      type: 'number',
+      message: "What is it's coefficient?",
+      default() {
+        return 1;
+      },
+    },
+    {
+      name: 'pro2',
+      type: 'string',
+      message: 'What is the first product?',
+      default() {
+        return 'CO2';
+      },
+    },
+    {
+      name: 'pro2co',
+      type: 'number',
+      message: "What is it's coefficient?",
+      default() {
+        return 1;
+      },
+    },
+  ]);
+
+  const equObj: any = {};
+
+  equObj[response.react1] = {};
+  equObj[response.react1].coefficient = response.react1co;
+  equObj[response.react2] = {};
+  equObj[response.react2].coefficient = response.react2co;
+  equObj[response.pro1] = {};
+  equObj[response.pro1].coefficient = response.pro1co;
+  equObj[response.pro2] = {};
+  equObj[response.pro2].coefficient = response.pro2co;
+
+  return equObj;
+};
+
 /************************** input strings to objects **************************/
 
 // convert equation in string form to object
@@ -117,16 +200,13 @@ const gramsToMoles = (formula: any) => {
 /********************************* operations *********************************/
 
 const calcFrom1Reactant = async () => {
-  const equation = equStrToObj(
-    await getTxtInput(
-      'What is the balanced chemical equation?',
-      'CH4 + 2O2 -> 2H2O + CO2'
-    )
-  );
+  const equation = await getFourPtEqu();
   const reactant1 = meaStrToObj(
     await getTxtInput('What is the given reactant?', '20 grams CH4')
   );
   // gramsToMoles();
+  console.log(equation);
+  console.log(reactant1);
   console.log(gramsToMoles(reactant1));
 };
 
