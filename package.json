@@ -4,6 +4,9 @@
   "description": "",
   "main": "main.js",
   "type": "module",
+  "bin": {
+    "chemhelp": "main.js"
+  },
   "scripts": {
     "start": "sh scripts/start.sh",
     "test": "sh scripts/test.sh",

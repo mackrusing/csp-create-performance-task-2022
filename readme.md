@@ -1,17 +1,16 @@
-# CSP Create Performance Task
+# ChemHelp - CSP Create Performance Task
 
-![language: typescript](https://img.shields.io/badge/language-typescript-blue)
+![language: javascript](https://img.shields.io/badge/language-javascript-yellow)
 ![environment: node](https://img.shields.io/badge/environment-node-brightgreen)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
+![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4)
 
-A command-line tool for DESCRIBE FUNCTION built with inquirer.
+A command-line tool that helps with basic chemistry calculations.
 
 - [Installation](#installation)
 - [Dependencies](#dependencies)
 - [Usage](#usage)
 - [Issues](#issues)
 - [License](#license)
-- [References](#references)
 
 ## Installation
 
@@ -28,11 +27,10 @@ npm install
 npm install --production
 ```
 
-3. Use the start script or run the `main.js` file in node
+3. Give yourself execute permissions for the `main.js` file (unix-systems only).
 
 ```
-npm start
-node main.js
+chmod +x main.js
 ```
 
 ## Dependencies
@@ -43,13 +41,15 @@ node main.js
 
 ### Dev dependencies
 
-- Prettier: code formatting
+- prettier: code formatting
 
 ## Usage
 
+
+
 ## Issues
 
-If you find any bugs, feel free to open an issue on this projects [issue page](https://github.com/mackrusing/rest-api/issues).
+If you find any bugs, feel free to open an issue on this project's [issue page](https://github.com/mackrusing/rest-api/issues).
 
 ## License
 

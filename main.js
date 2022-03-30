@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // helpers
 const input = require('helpers/user-input.js');
 
