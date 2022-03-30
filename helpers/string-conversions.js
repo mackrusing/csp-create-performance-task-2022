@@ -6,3 +6,5 @@ module.exports.measure = (measureStr) => {
     formula: meaArr[2],
   };
 };
+
+module.exports.equation = (equationStr) => {};
