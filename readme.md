@@ -21,7 +21,7 @@ A command-line tool for DESCRIBE FUNCTION built with inquirer.
 git clone https://github.com/mackrusing/rest-api.git
 ```
 
-2. Install all dependences using npm. To exclude dev dependencies use the `--production` flag (if you don't want to install typescript and prettier)
+2. Install all dependences using npm. To exclude dev dependencies use the `--production` flag (if you don't want to install prettier)
 
 ```
 npm install
@@ -37,11 +37,13 @@ node main.js
 
 ## Dependencies
 
--
+- chalk: terminal styling
+- inquirer: command line user interface
+- periodic-table: periodic table data and utilities
 
 ### Dev dependencies
 
-- Prettier
+- Prettier: code formatting
 
 ## Usage
 
