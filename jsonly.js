@@ -1,10 +1,11 @@
 // modules
 import inquirer from 'inquirer';
 import pt from 'periodic-table';
+import util from 'periodic-table/util';
 
 /*************************** character type helpers ***************************/
 
-const isUpperCase = (char: string): boolean => {
+const isUpperCase = (char) => {
   // check if number
   if (isNum(char)) {
     return false;
@@ -19,7 +20,7 @@ const isUpperCase = (char: string): boolean => {
   return true;
 };
 
-const isNum = (str: string): boolean => {
+const isNum = (str) => {
   if (+str) {
     return true;
   } else {
@@ -30,7 +31,7 @@ const isNum = (str: string): boolean => {
 /***************************** user input helpers *****************************/
 
 // text input
-const getTxtInput = async (prompt: string, sample: string) => {
+const getTxtInput = async (prompt, sample) => {
   const response = await inquirer.prompt([
     {
       name: 'res',
@@ -113,7 +114,7 @@ const getFourPtEqu = async () => {
     },
   ]);
 
-  const equObj: any = {};
+  const equObj = {};
 
   equObj[response.react1] = {};
   equObj[response.react1].coefficient = response.react1co;
@@ -130,12 +131,12 @@ const getFourPtEqu = async () => {
 /************************** input strings to objects **************************/
 
 // convert equation in string form to object
-const equStrToObj = (equStr: string) => {
+const equStrToObj = (equStr) => {
   const equArr = equStr.split(' ');
 };
 
 // convert measurement in string form to object
-const meaStrToObj = (meaStr: string) => {
+const meaStrToObj = (meaStr) => {
   const meaArr = meaStr.split(' ');
   return {
     ammount: +meaArr[0],
@@ -145,9 +146,9 @@ const meaStrToObj = (meaStr: string) => {
 };
 
 // convert formula to array of element objects
-const formulaToElementsArr = (formula: string) => {
+const formulaToElementsArr = (formula) => {
   // list of elements in formula
-  const elementsArr: any = [];
+  const elementsArr = [];
 
   // loop vars
   let currentElement = { element: '', subscript: '' };
@@ -193,7 +194,7 @@ const formulaToElementsArr = (formula: string) => {
 /******************************* grams to moles *******************************/
 
 // convert a formula with ammount in grams to moles
-const gramsToMoles = (formula: any) => {
+const gramsToMoles = (formula) => {
   const eleArr = formulaToElementsArr(formula.formula);
   console.log(eleArr);
 };
@@ -239,4 +240,8 @@ const test = {
 
 /*********************************** tests ************************************/
 
-calcFrom1Reactant();
+// calcFrom1Reactant();
+
+console.log(pt.symbols.He)
+console.log(util.atomicMass("H2 O"));
+
