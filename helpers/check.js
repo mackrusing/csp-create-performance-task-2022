@@ -1,5 +1,5 @@
 module.exports.isNum = (str) => {
-  if (+str) {
+  if (+str || +str === 0) {
     return true;
   } else {
     return false;

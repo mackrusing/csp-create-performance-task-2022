@@ -1,6 +1,8 @@
 // modules
 const inquirer = require('inquirer');
 
+/******************************************************************************/
+
 module.exports.txt = async (prompt, sample) => {
   // get input using inquirer
   const response = await inquirer.prompt([

@@ -1,6 +1,3 @@
-let strNum = '2';
-let strNum2 = '3';
+const util = require('periodic-table/util');
 
-strNum += strNum2;
-
-console.log(strNum);
+console.log(util.atomicMass('H2 O'));
