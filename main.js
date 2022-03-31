@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
-// helpers
+// handlers
 const solve = require('./handlers/solve');
+const calculate = require('./handlers/calculate');
+
+// helpers
+const menu = require('./helpers/menu');
 
 // command line arguments
 const args = process.argv.slice(2);
@@ -14,6 +18,15 @@ if (args[0] === 'help') {
 // handle solve command
 if (args[0] === 'solve') {
   solve.simple();
+}
+
+// handle calculate command
+if (args[0] === 'calculate') {
+  if (args[1] === 'molconv') {
+    calculate.molarConversion();
+  } else {
+    menu.calculate();
+  }
 }
 
 // handle invalid command call
