@@ -28,21 +28,23 @@ npm install
 npm install --production
 ```
 
-3. Give yourself execute permissions for the `main.js` file (unix-systems only).
+3. Give yourself execute permissions for the `main.js` file (unix-like systems only).
 
 ```
 chmod +x main.js
 ```
 
-## Dependencies
+4. Link package
 
-- chalk: terminal styling
-- inquirer: command line user interface
-- periodic-table: periodic table data and utilities
+```
+npm link
+```
 
-### Dev dependencies
+5. execute command
 
-- prettier: code formatting
+```
+chemhelp help
+```
 
 ## Usage
 
