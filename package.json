@@ -10,7 +10,9 @@
   "scripts": {
     "start": "sh scripts/start.sh",
     "test": "sh scripts/test.sh",
-    "clean": "sh scripts/clean.sh"
+    "clean": "sh scripts/clean.sh",
+    "link-command": "sh scripts/link-command.sh",
+    "unlink-command": "sh scripts/unlink-command.sh"
   },
   "author": "Mack Rusing",
   "license": "MIT",
