@@ -7,17 +7,18 @@
 A command-line tool that helps with basic chemistry calculations.
 
 - [Installation](#installation)
-- [Dependencies](#dependencies)
 - [Usage](#usage)
 - [Issues](#issues)
 - [License](#license)
 
 ## Installation
 
+**This program requires [Node.js](https://nodejs.org/en/)**
+
 1. Clone this repository to your machine
 
 ```
-git clone https://github.com/mackrusing/rest-api.git
+git clone https://github.com/mackrusing/csp-create-performance-task.git
 ```
 
 2. Install all dependences using npm. To exclude dev dependencies use the `--production` flag (if you don't want to install prettier)
@@ -44,8 +45,6 @@ chmod +x main.js
 - prettier: code formatting
 
 ## Usage
-
-
 
 ## Issues
 
