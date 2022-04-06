@@ -16,3 +16,16 @@ module.exports.usage = () => {
     '\n  help:         Display help for a command'
   );
 };
+
+module.exports.solve = () => {
+  console.log(
+    'Perform a stoichiometry calculation',
+    '\n',
+    chalk.bold('\nUSAGE'),
+    '\n  chemhelp solve <subcommand>',
+    '\n',
+    chalk.bold('\nSUBCOMMANDS'),
+    '\n  simple:       Find other masses from one given value',
+    '\n  lr:           Given multiple values, find limiting reactant'
+  );
+};
