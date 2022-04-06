@@ -1,2 +1,0 @@
-- match given unit to standard representation in `meaStrToObj()` function / add alternate unit names
-- validate formulas are in equations
