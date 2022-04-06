@@ -3,16 +3,14 @@
 // handlers
 const solve = require('./handlers/solve');
 const calculate = require('./handlers/calculate');
-
-// helpers
-const menu = require('./helpers/menu');
+const help = require('./handlers/help');
 
 // command line arguments
 const args = process.argv.slice(2);
 
 // handle help command
 if (args[0] === 'help') {
-  console.log('avalible commands: help, solve');
+  help.usage();
 }
 
 // handle solve command
