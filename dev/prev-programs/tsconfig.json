@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["es2021"],
-    "module": "ES2022",
+    "module": "es2022",
     "target": "es2021",
     "moduleResolution": "Node",
     "strict": true,
@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": ["main.ts"]
+  "files": ["main.ts", "new.ts"]
 }

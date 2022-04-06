@@ -1,2 +1,1 @@
-sh scripts/build.sh
-node main.js
+node tests/test.js
