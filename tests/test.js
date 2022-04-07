@@ -33,12 +33,12 @@ const myEquationObj = {
   CO2: { coefficient: 1 },
 };
 
-const myGivenObj = { formula: 'CH4', ammount: 2 };
+const myGivenObj = { formula: 'CH4', amount: 2 };
 
 const simpleStoich = (equationObj, measureObj) => {
   // calculate multiplier
   const baseMol =
-    measureObj.ammount / equationObj[measureObj.formula].coefficient;
+    measureObj.amount / equationObj[measureObj.formula].coefficient;
 
   // table obj
   const table = {};

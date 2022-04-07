@@ -6,7 +6,7 @@ const check = require('./check');
 module.exports.measure = (measureStr) => {
   const measureArr = measureStr.split(' ');
   return {
-    ammount: +measureArr[0],
+    amount: +measureArr[0],
     unit: measureArr[1],
     formula: measureArr[2],
   };

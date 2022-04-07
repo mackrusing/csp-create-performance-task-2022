@@ -13,10 +13,10 @@ module.exports.convert = async () => {
 
   // convert grams to moles if neccesary
   if (measureObj.unit === 'grams') {
-    measureObj.ammount /= calculate.atomicMass(measureObj.formula);
+    measureObj.amount /= calculate.atomicMass(measureObj.formula);
     measureObj.unit = 'moles';
   } else if (measureObj.unit === 'moles') {
-    measureObj.ammount *= calculate.atomicMass(measureObj.formula);
+    measureObj.amount *= calculate.atomicMass(measureObj.formula);
     measureObj.unit = 'grams';
   }
 
