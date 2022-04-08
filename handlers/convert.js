@@ -28,7 +28,7 @@ module.exports.convert = async () => {
   }
 
   // check for errors
-  if (!convertObj.amount || !convertObj.unit || !convertObj.formula) {
+  if (!measureObj.amount || !measureObj.unit || !measureObj.formula) {
     error.input();
   }
 
