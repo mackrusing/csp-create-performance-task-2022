@@ -40,13 +40,45 @@ chmod +x main.js
 npm link
 ```
 
-5. execute command
-
-```
-chemhelp help
-```
-
 ## Usage
+
+```
+chemhelp <command>
+```
+
+Solve a simple stoich problem (with a balenced equation and one given value).
+
+```
+chemhelp solve
+```
+
+Convert from moles to grams or vice versa.
+
+```
+chemhelp convert
+```
+
+### Format
+
+measure
+
+```
+1 mole H2O
+2 mol CO2
+3 moles CH4
+```
+
+```
+1 gram H2O
+2 g CO2
+3 grams CH4
+```
+
+equation
+
+```
+2H2O
+```
 
 ## Issues
 
