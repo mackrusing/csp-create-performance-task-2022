@@ -28,23 +28,65 @@ npm install
 npm install --production
 ```
 
-3. Give yourself execute permissions for the `main.js` file (unix-systems only).
+3. Give yourself execute permissions for the `main.js` file (unix-like systems only).
 
 ```
 chmod +x main.js
 ```
 
-## Dependencies
+4. Link package
 
-- chalk: terminal styling
-- inquirer: command line user interface
-- periodic-table: periodic table data and utilities
-
-### Dev dependencies
-
-- prettier: code formatting
+```
+npm link
+```
 
 ## Usage
+
+ChemHelp is a command-line tool for performing simple chemistry related calculations including mass-to-mole conversion and simple stoichiometry.
+
+```
+chemhelp <command>
+```
+
+### Core commands
+
+ChemHelp currently has two core commands: `convert` and `solve`. These commands **convert** grams to moles / moles to grams and **solve** stoich equations respectfully.
+
+```
+chemhelp convert
+chemhelp solve
+```
+
+### Input formats
+
+When executing a command, the user will be prompted to provide input in the following formats.
+
+#### Equations
+
+Enter subscripts as normal characters and the "reacts to form arrow" as `->` or `=`. Be sure to capitalize elements properly; "CO" (carbon monoxide) and "Co" (cobalt) will result in very different outcomes.
+
+CH₄ + 2O₂ → CO₂ + 2H₂O
+
+```
+CH4 + 2O2 -> CO2 + 2H2O
+CH4 + 2O2 = CO2 + 2H2O
+```
+
+#### Measures
+
+Enter measurements in the following order: ammount, unit, compound formula. Each element must be separated by a space. All measures must be in grams or moles.
+
+```
+1 mole H2O
+2.5 mol CO2
+328 moles CH4
+```
+
+```
+1 gram H2O
+2.5 g CO2
+328 grams CH4
+```
 
 ## Issues
 

@@ -8,9 +8,8 @@
     "chemhelp": "main.js"
   },
   "scripts": {
-    "start": "sh scripts/start.sh",
-    "test": "sh scripts/test.sh",
-    "clean": "sh scripts/clean.sh"
+    "start": "node main.js",
+    "format": "npx prettier --write ./"
   },
   "author": "Mack Rusing",
   "license": "MIT",
