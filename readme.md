@@ -50,7 +50,7 @@ chemhelp <command>
 
 ### Core commands
 
-ChemHelp currently has two core commands: `convert` and `solve`. These commands **convert** mass to moles / moles to mass and **solve** stoich equations respectfully.
+ChemHelp currently has two core commands: `convert` and `solve`. These commands **convert** grams to moles / moles to grams and **solve** stoich equations respectfully.
 
 ```
 chemhelp convert
@@ -59,7 +59,7 @@ chemhelp solve
 
 ### Input formats
 
-When executing a command, the user will be prompted to provide input in the following formats:
+When executing a command, the user will be prompted to provide input in the following formats.
 
 #### Equations
 
