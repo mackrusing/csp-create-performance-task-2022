@@ -1,3 +1,3 @@
 module.exports.measure = (measureObj) => {
-  return `${measureObj.ammount} ${measureObj.unit} ${measureObj.formula}`;
+  return `${measureObj.amount} ${measureObj.unit} ${measureObj.formula}`;
 };
