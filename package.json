@@ -1,7 +1,7 @@
 {
   "name": "csp-create-performance-task",
   "version": "1.0.0",
-  "description": "",
+  "description": "A command-line tool that helps with basic chemistry calculations.",
   "main": "main.js",
   "type": "commonjs",
   "bin": {
